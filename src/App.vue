@@ -1,8 +1,9 @@
 <template>
   <div id="app">
+    <h1>ToDo List</h1>
     <form v-on:submit.prevent="addToDo">
-      <label for="new-todo">Add a new ToDo:</label>
-      <input id="new-todo" type="text" v-model="newToDo">
+      <label for="new-todo" ></label>
+      <input id="new-todo" type="text" v-model="newToDo" placeholder="Add a new ToDo" required>
       <input type="radio" value="true" name="priority" v-model="newToDoPriority">
       <label for="high">High priority</label>
       <input type="radio" value="" name="priority" v-model="newToDoPriority">
@@ -28,9 +29,9 @@ export default {
   data(){
     return{
       todos: [
-        {name: "go shopping", priority: true},
-        {name: "shower", priority: false},
-        {name: "shave", priority: true}
+        {name: "Buy Milk", priority: true},
+        {name: "Shower", priority: false},
+        {name: "Shave", priority: true}
         ],
       newToDo: "",
       newToDoPriority: ""
@@ -64,6 +65,31 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  font-weight: 400;
+}
+
+h1 {
+  font-weight: 800;
+}
+
+input[type=submit] {
+    appearance:none;
+    -webkit-appearance:none;
+    padding:10px;
+    border:solid 5px;
+    background-color: black;
+    color:#fff;
+    font-family: inherit;
+    font-weight:600;
+    border-radius:5px;
+    border-color: black;
+    margin-left: 10px;
+}
+
+input[type=submit]:hover {
+    background-color: white;
+    color: black;
+    border-color: black;
 }
 
 .todo-container {
@@ -71,37 +97,31 @@ export default {
     flex-direction: row;
     flex-wrap: wrap;
     list-style-type: none;
+    justify-content: center;
 }
 
 .low {
     display: flex;
     flex-direction: column;
-    border: 5px solid green;
-    border-radius: 10%;
+    border: 10px solid green;
     background-color: white;
-    min-width: 200px;
-    max-width: 300px;
-    min-height: 68px;
+    width: 800px;
     padding: 10px;
-    line-height: 18px;
-    margin-bottom: 10px;
-    margin-right: 20px;
     color:green;
+    font-weight: 600;
+    font-size: 18pt;
+
 }
 
 .high {
     display: flex;
     flex-direction: column;
     border: 10px solid red;
-    border-radius: 10%;
-    background-color: white;
-    min-width: 200px;
-    max-width: 300px;
-    min-height: 68px;
+    background-color: red;
+    width: 800px;
     padding: 10px;
-    line-height: 18px;
-    margin-bottom: 10px;
-    margin-right: 20px;
-    color: red;
+    color: white;
+    font-weight: 800;
+    font-size: 24pt;
 }
 </style>
