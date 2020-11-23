@@ -3,19 +3,18 @@
     <form v-on:submit.prevent="addToDo">
       <label for="new-todo">Add a new ToDo:</label>
       <input id="new-todo" type="text" v-model="newToDo">
-      <input type="radio" value="high priority" name="priority" v-model="newToDoPriority">
+      <input type="radio" value="true" name="priority" v-model="newToDoPriority">
       <label for="high">High priority</label>
-      <input type="radio" value="low priority" name="priority" v-model="newToDoPriority">
+      <input type="radio" value="" name="priority" v-model="newToDoPriority">
       <label for="low">Low priority</label>
       <input type="submit" value="Save new ToDo">
     </form>
     <div class="todo-container">
     <ul>
       <li v-for="(todo, index) in todos"
-      :key="index" class="single-todo-high">
+      :key="index" v-bind:class= "todo.priority ? 'high' : 'low'">
       <span>{{todo.name}}</span>
       <br>
-      <span>{{todo.priority}}</span>
       </li>
 
     </ul>
@@ -29,9 +28,9 @@ export default {
   data(){
     return{
       todos: [
-        {name: "go shopping", priority: "high priority"},
-        {name: "shower", priority: "low priority"},
-        {name: "shave", priority: "low priority"}
+        {name: "go shopping", priority: true},
+        {name: "shower", priority: false},
+        {name: "shave", priority: true}
         ],
       newToDo: "",
       newToDoPriority: ""
@@ -44,13 +43,15 @@ export default {
         priority: this.newToDoPriority
         });
       this.newToDo = ""
+      this.newToDoPriority = ""
     },
-    classObject: function(){
-      return {
-        "single-todo-low": todo.priority == "low priority",
-        "single-todo-high": todo.priority == "high priority"
-      }
-    }
+    // classObject: function(index){
+    //   if (todo.priority === "low priority"){
+    //     return "low"
+    //   } else {
+    //     return "high"
+    //   }
+    // }
   }
 }
 </script>
@@ -65,7 +66,14 @@ export default {
   margin-top: 60px;
 }
 
-.single-todo-low {
+.todo-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    list-style-type: none;
+}
+
+.low {
     display: flex;
     flex-direction: column;
     border: 5px solid green;
@@ -78,9 +86,10 @@ export default {
     line-height: 18px;
     margin-bottom: 10px;
     margin-right: 20px;
+    color:green;
 }
 
-.single-todo-high {
+.high {
     display: flex;
     flex-direction: column;
     border: 10px solid red;
@@ -93,5 +102,6 @@ export default {
     line-height: 18px;
     margin-bottom: 10px;
     margin-right: 20px;
+    color: red;
 }
 </style>
